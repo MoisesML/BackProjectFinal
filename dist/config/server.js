@@ -20,7 +20,7 @@ class Server {
             next();
         });
         this.app.use(cors());
-        this.puerto = process.env.PUERTO || 5000;
+        this.puerto = process.env.PORT || 5000;
         this.configurarBodyParser();
         this.conectarMongo();
         this.rutas();
