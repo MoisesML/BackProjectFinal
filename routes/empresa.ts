@@ -3,6 +3,6 @@ import { crearEmpresa, devolverEmpresas, loginEmpresa } from '../controllers/emp
 
 export var empresa_router = Router();
 
-empresa_router.post('/empregistro', crearEmpresa);
-empresa_router.post('/emplogin', loginEmpresa);
+empresa_router.post('/empresa/registro', crearEmpresa);
+empresa_router.post('/empresa/login', loginEmpresa);
 empresa_router.get('/empresas', devolverEmpresas);

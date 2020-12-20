@@ -18,6 +18,10 @@ var fonoSchema = new mongoose_1.Schema({
     }
 });
 var estudioSchema = new mongoose_1.Schema({
+    est_nom: {
+        type: String,
+        required: true
+    },
     est_nvl: {
         type: String,
         required: true
@@ -36,6 +40,10 @@ var estudioSchema = new mongoose_1.Schema({
     }
 });
 var trabajoSchema = new mongoose_1.Schema({
+    trab_pue: {
+        type: String,
+        required: true
+    },
     trab_emp: {
         type: String,
         required: true

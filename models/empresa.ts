@@ -15,6 +15,10 @@ export var empresaSchema = new Schema ({
         type : String,
         required : true
     },
+    emp_rubr : {
+        type : String,
+        required : true
+    },
     emp_dire : {
         type : String,
         // required : true

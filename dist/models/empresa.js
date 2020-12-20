@@ -19,6 +19,10 @@ exports.empresaSchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
+    emp_rubr: {
+        type: String,
+        required: true
+    },
     emp_dire: {
         type: String,
     },

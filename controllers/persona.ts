@@ -1,4 +1,4 @@
-import { request, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { CallbackError } from 'mongoose';
 import { Persona } from '../config/mongoose';
 
@@ -71,17 +71,17 @@ export var devolverPersonas = (req:Request, res:Response) => {
 export var devolverPersona = (req:Request, res:Response) => {
     let { id } = req.params;
     Persona.findById(id, (error:CallbackError, persona:any) => {
-        if (persona) {
-            res.json({
-                ok : true,
-                content : persona,
-                message : 'Se encontro la persona'
-            })
-        } else {
+        if (error) {
             res.json({
                 ok : false,
                 content : null,
                 message : 'No se encontro la persona'
+            })
+        } else {
+            res.json({
+                ok : true,
+                content : persona,
+                message : 'Se encontro la persona'
             })
         }
     })

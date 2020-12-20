@@ -8,6 +8,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const persona_1 = require("../routes/persona");
 const empresa_1 = require("../routes/empresa");
+const anuncio_1 = require("../routes/anuncio");
 var cors = require('cors');
 class Server {
     constructor() {
@@ -32,7 +33,7 @@ class Server {
         this.app.get('/', (req, res) => {
             res.send('Bienvenido a la API-Proyecto');
         });
-        this.app.use('', persona_1.persona_router, empresa_1.empresa_router);
+        this.app.use('', persona_1.persona_router, empresa_1.empresa_router, anuncio_1.anuncio_router);
     }
     iniciarServidor() {
         this.app.listen(this.puerto, () => {
@@ -40,7 +41,7 @@ class Server {
         });
     }
     conectarMongo() {
-        mongoose_1.default.connect('mongodb+srv://Moises:moises@cluster0.fwbv5.mongodb.net/proyectocodigo?retryWrites=true&w=majority', { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, useCreateIndex: true });
+        mongoose_1.default.connect('mongodb+srv://Moises:moises@cluster0.nhdth.mongodb.net/proyectocodigo?retryWrites=true&w=majority', { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, useCreateIndex: true });
     }
 }
 exports.default = Server;

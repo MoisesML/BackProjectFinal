@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { persona_router } from '../routes/persona';
 import { empresa_router } from '../routes/empresa';
+import { anuncio_router } from '../routes/anuncio';
 var cors = require('cors');
 
 export default class Server {
@@ -35,7 +36,7 @@ export default class Server {
         this.app.get('/', (req:Request, res:Response) => {
             res.send('Bienvenido a la API-Proyecto')
         });
-        this.app.use('', persona_router, empresa_router);
+        this.app.use('', persona_router, empresa_router, anuncio_router);
     }
 
     iniciarServidor () {
@@ -45,7 +46,7 @@ export default class Server {
     }
 
     conectarMongo () {
-        mongoose.connect('mongodb+srv://Moises:moises@cluster0.fwbv5.mongodb.net/proyectocodigo?retryWrites=true&w=majority', { useNewUrlParser : true, useFindAndModify : false, useUnifiedTopology : true, useCreateIndex : true })
+        mongoose.connect('mongodb+srv://Moises:moises@cluster0.nhdth.mongodb.net/proyectocodigo?retryWrites=true&w=majority',{ useNewUrlParser : true, useFindAndModify : false, useUnifiedTopology : true, useCreateIndex : true })
     }
 
 }

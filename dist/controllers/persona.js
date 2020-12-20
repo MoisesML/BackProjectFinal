@@ -75,18 +75,18 @@ exports.devolverPersonas = devolverPersonas;
 var devolverPersona = (req, res) => {
     let { id } = req.params;
     mongoose_1.Persona.findById(id, (error, persona) => {
-        if (persona) {
-            res.json({
-                ok: true,
-                content: persona,
-                message: 'Se encontro la persona'
-            });
-        }
-        else {
+        if (error) {
             res.json({
                 ok: false,
                 content: null,
                 message: 'No se encontro la persona'
+            });
+        }
+        else {
+            res.json({
+                ok: true,
+                content: persona,
+                message: 'Se encontro la persona'
             });
         }
     });

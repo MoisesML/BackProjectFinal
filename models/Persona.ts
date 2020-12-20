@@ -14,6 +14,10 @@ var fonoSchema = new Schema ({
 })
 
 var estudioSchema = new Schema ({
+    est_nom : {
+        type : String,
+        required : true
+    },
     est_nvl : {
         type : String,
         required : true
@@ -33,6 +37,10 @@ var estudioSchema = new Schema ({
 })
 
 var trabajoSchema = new Schema ({
+    trab_pue : {
+        type:String,
+        required : true
+    },
     trab_emp : {
         type:String,
         required : true
