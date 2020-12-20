@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.anuncio_router = void 0;
+const express_1 = require("express");
+const empresa_1 = require("./empresa");
+const anuncio_1 = require("../controllers/anuncio");
+exports.anuncio_router = express_1.Router();
+empresa_1.empresa_router.post('/crear/anuncio', anuncio_1.crearAnuncio);
+empresa_1.empresa_router.get('/anuncios/:id', anuncio_1.traerAnunciosXEmpresa);
+empresa_1.empresa_router.get('/anuncios/keyword/:keyword', anuncio_1.busquedaAnunciosPuesto);
