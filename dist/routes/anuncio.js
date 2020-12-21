@@ -8,3 +8,4 @@ exports.anuncio_router = express_1.Router();
 empresa_1.empresa_router.post('/crear/anuncio', anuncio_1.crearAnuncio);
 empresa_1.empresa_router.get('/anuncios/:id', anuncio_1.traerAnunciosXEmpresa);
 empresa_1.empresa_router.get('/anuncios/keyword/:keyword', anuncio_1.busquedaAnunciosPuesto);
+empresa_1.empresa_router.get('/anuncioscontratados', anuncio_1.anunciosContratados);

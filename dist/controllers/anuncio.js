@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.crearAnuncio = void 0;
+exports.anunciosContratados = exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.crearAnuncio = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearAnuncio = (req, res) => {
     let objAnuncio = new mongoose_1.Anuncio(req.body);
@@ -49,7 +49,7 @@ exports.busquedaAnunciosPuesto = ((req, res) => {
             res.json({
                 ok: false,
                 content: null,
-                message: `'No se encontro los anuncios' + ${keyword}`
+                message: `No se encontro los anuncios + ${keyword}`
             });
         }
         else {
@@ -57,6 +57,24 @@ exports.busquedaAnunciosPuesto = ((req, res) => {
                 ok: true,
                 content: anuncios,
                 message: 'Se encontro los anuncios con la palabra ' + keyword
+            });
+        }
+    });
+});
+exports.anunciosContratados = ((req, res) => {
+    mongoose_1.Anuncio.find({ anun_cont: true }, (error, anuncios) => {
+        if (anuncios.length > 0) {
+            res.json({
+                ok: true,
+                content: anuncios,
+                message: 'Estos son todos los anuncios contratados'
+            });
+        }
+        else {
+            res.json({
+                ok: false,
+                content: null,
+                message: 'No se encontro anuncios contratados'
             });
         }
     });

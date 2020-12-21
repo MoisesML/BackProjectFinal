@@ -48,7 +48,7 @@ export var busquedaAnunciosPuesto = ((req:Request, res:Response) => {
             res.json({
                 ok : false,
                 content : null,
-                message : `'No se encontro los anuncios' + ${keyword}`
+                message : `No se encontro los anuncios + ${keyword}`
             })
         } else {
             res.json({
@@ -58,4 +58,22 @@ export var busquedaAnunciosPuesto = ((req:Request, res:Response) => {
             })
         }
     })
-})
+});
+
+export var anunciosContratados = ((req:Request, res:Response) => {
+    Anuncio.find({anun_cont : true}, (error:CallbackError, anuncios:any) => {
+        if (anuncios.length > 0) {
+            res.json({
+                ok : true,
+                content : anuncios,
+                message : 'Estos son todos los anuncios contratados'
+            })
+        } else {
+            res.json({
+                ok : false,
+                content : null,
+                message : 'No se encontro anuncios contratados'
+            })
+        }
+    })
+});

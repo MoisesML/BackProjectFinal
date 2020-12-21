@@ -44,10 +44,10 @@ var loginPersona = (req, res) => {
             }
         }
         else {
-            res.status(404).json({
+            res.status(200).json({
                 ok: false,
                 content: null,
-                message: 'Usuario inexistente'
+                message: 'Usuario inexistente o usuario de empresa'
             });
         }
     });
