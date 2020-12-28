@@ -8,3 +8,4 @@ exports.persona_router.post('/registro', persona_1.crearPersona);
 exports.persona_router.post('/login', persona_1.loginPersona);
 exports.persona_router.get('/personas', persona_1.devolverPersonas);
 exports.persona_router.get('/persona/:id', persona_1.devolverPersona);
+exports.persona_router.put('/editar/:id', persona_1.editarPersona);

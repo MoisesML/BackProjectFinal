@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
+exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
     let objPersona = new mongoose_1.Persona(req.body);
@@ -99,3 +99,23 @@ var devolverPersona = (req, res) => {
     });
 };
 exports.devolverPersona = devolverPersona;
+var editarPersona = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Persona.findByIdAndUpdate(id, req.body, { new: true }, (error, usuarioActualizado) => {
+        if (error) {
+            res.status(400).json({
+                ok: false,
+                content: error,
+                message: 'Hubo un error al actualizar el usuario'
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: true,
+                content: usuarioActualizado,
+                message: 'Se actualizo exitosamente el usuario'
+            });
+        }
+    });
+};
+exports.editarPersona = editarPersona;

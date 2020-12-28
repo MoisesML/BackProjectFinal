@@ -92,4 +92,23 @@ export var devolverPersona = (req:Request, res:Response) => {
             })
         }
     })
-}
+};
+
+export var editarPersona = (req:Request, res:Response) => {
+    let { id } = req.params;
+    Persona.findByIdAndUpdate(id, req.body, {new:true}, (error:CallbackError, usuarioActualizado:any) => {
+        if (error) {
+            res.status(400).json({
+                ok : false,
+                content : error,
+                message : 'Hubo un error al actualizar el usuario'
+            })
+        } else {
+            res.status(200).json({
+                ok: true,
+                content: usuarioActualizado,
+                message:'Se actualizo exitosamente el usuario'
+            })
+        }
+    })
+};
