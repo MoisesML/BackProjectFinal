@@ -27,7 +27,7 @@ exports.anuncioSchema = new mongoose_1.Schema({
         required: true
     },
     anun_desc: {
-        type: Array,
+        type: String,
     },
     anun_post: [
         postulanteSchema

@@ -26,7 +26,7 @@ export var anuncioSchema = new Schema ({
         required : true
     },
     anun_desc : {
-        type : Array,
+        type : String,
         // required : true
     },
     anun_post : [
