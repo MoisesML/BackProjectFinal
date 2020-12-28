@@ -29,9 +29,14 @@ var loginPersona = (req, res) => {
         if (persona) {
             let validacion = persona.validarContraseña(password);
             if (validacion) {
+                let token = persona.generarJWT();
+                let nombre = persona.per_nomb + ' ' + persona.nom_apel;
                 res.json({
                     ok: true,
-                    content: persona._id,
+                    content: {
+                        nombre,
+                        token
+                    },
                     message: 'Bienvenido'
                 });
             }

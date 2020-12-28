@@ -78,7 +78,7 @@ exports.personaSchema = new mongoose_1.Schema({
         type: String,
     },
     per_fnac: {
-        type: String,
+        type: Date,
     },
     per_dire: {
         type: String,
