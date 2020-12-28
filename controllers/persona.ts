@@ -30,7 +30,7 @@ export var loginPersona = (req:Request, res:Response) => {
             if (validacion) {
                 let token = persona.generarJWT()
                 let nombre = persona.per_nomb + ' ' + persona.per_apel
-                let id = persona.per_id
+                let id = persona._id
                 res.json({
                     ok : true,
                     content : {
