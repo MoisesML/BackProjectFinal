@@ -29,7 +29,7 @@ export var loginPersona = (req:Request, res:Response) => {
             let validacion = persona.validarContraseña(password);
             if (validacion) {
                 let token = persona.generarJWT()
-                let nombre = persona.per_nomb + ' ' + persona.nom_apel
+                let nombre = persona.per_nomb + ' ' + persona.per_apel
                 res.json({
                     ok : true,
                     content : {

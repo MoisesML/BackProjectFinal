@@ -30,7 +30,7 @@ var loginPersona = (req, res) => {
             let validacion = persona.validarContraseña(password);
             if (validacion) {
                 let token = persona.generarJWT();
-                let nombre = persona.per_nomb + ' ' + persona.nom_apel;
+                let nombre = persona.per_nomb + ' ' + persona.per_apel;
                 res.json({
                     ok: true,
                     content: {
