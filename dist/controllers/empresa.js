@@ -32,11 +32,13 @@ var loginEmpresa = (req, res) => {
                 let token = empresa.generarJWT();
                 let nombre = empresa.emp_nomb;
                 let id = empresa._id;
+                let tipo = 'empresa';
                 res.json({
                     ok: true,
                     content: {
                         nombre,
                         id,
+                        tipo,
                         token
                     },
                     message: 'Bienvenido'

@@ -30,12 +30,14 @@ export var loginEmpresa = (req:Request, res:Response) => {
             if (validacion) {
                 let token = empresa.generarJWT();
                 let nombre = empresa.emp_nomb;
-                let id = empresa._id
+                let id = empresa._id;
+                let tipo = 'empresa';
                 res.json({
                     ok : true,
                     content : {
                         nombre,
                         id,
+                        tipo,
                         token
                     },
                     message : 'Bienvenido'

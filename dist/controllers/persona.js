@@ -32,11 +32,13 @@ var loginPersona = (req, res) => {
                 let token = persona.generarJWT();
                 let nombre = persona.per_nomb + " " + persona.per_apel;
                 let id = persona._id;
+                let tipo = 'persona';
                 res.json({
                     ok: true,
                     content: {
                         nombre,
                         id,
+                        tipo,
                         token,
                     },
                     message: "Bienvenido",
