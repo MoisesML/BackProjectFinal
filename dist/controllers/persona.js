@@ -103,7 +103,7 @@ var editarPersona = (req, res) => {
     let { id } = req.params;
     mongoose_1.Persona.findByIdAndUpdate(id, req.body, { new: true }, (error, usuarioActualizado) => {
         if (error) {
-            res.status(400).json({
+            res.status(200).json({
                 ok: false,
                 content: error,
                 message: 'Hubo un error al actualizar el usuario'
