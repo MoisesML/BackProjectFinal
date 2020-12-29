@@ -31,11 +31,11 @@ var estudioSchema = new mongoose_1.Schema({
         required: true
     },
     est_ini: {
-        type: Date,
+        type: String,
         required: true
     },
     est_fin: {
-        type: Date,
+        type: String,
         required: true
     }
 });
