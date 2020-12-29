@@ -112,3 +112,64 @@ export var editarPersona = (req:Request, res:Response) => {
         }
     })
 };
+
+export var agregarFono = (req:Request, res:Response) => {
+    let { id } = req.params;
+    Persona.findById(id, (error:CallbackError, persona:any) => {
+        if (persona) {
+            persona.per_fonos.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok : true,
+                content : persona,
+                message : 'Se agrego el fono correctamente'
+            })
+        } else {
+            res.status(200).json({
+                ok : false,
+                content : error,
+                message : 'No se pudo agregar el fono'
+            })
+        }
+    })
+};
+export var agregarEstudio = (req:Request, res:Response) => {
+    let { id } = req.params;
+    Persona.findById(id, (error:CallbackError, persona:any) => {
+        if (persona) {
+            persona.per_estu.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok : true,
+                content : persona,
+                message : 'Se agrego el estudio correctamente'
+            })
+        } else {
+            res.status(200).json({
+                ok : false,
+                content : error,
+                message : 'No se pudo agregar el estudio'
+            })
+        }
+    })
+};
+export var agregarTrabajo = (req:Request, res:Response) => {
+    let { id } = req.params;
+    Persona.findById(id, (error:CallbackError, persona:any) => {
+        if (persona) {
+            persona.per_trab.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok : true,
+                content : persona,
+                message : 'Se agrego el trabajo correctamente'
+            })
+        } else {
+            res.status(200).json({
+                ok : false,
+                content : error,
+                message : 'No se pudo agregar el trabajo'
+            })
+        }
+    })
+};

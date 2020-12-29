@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
+exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
     let objPersona = new mongoose_1.Persona(req.body);
@@ -119,3 +119,69 @@ var editarPersona = (req, res) => {
     });
 };
 exports.editarPersona = editarPersona;
+var agregarFono = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (persona) {
+            persona.per_fonos.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: 'Se agrego el fono correctamente'
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: 'No se pudo agregar el fono'
+            });
+        }
+    });
+};
+exports.agregarFono = agregarFono;
+var agregarEstudio = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (persona) {
+            persona.per_estu.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: 'Se agrego el estudio correctamente'
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: 'No se pudo agregar el estudio'
+            });
+        }
+    });
+};
+exports.agregarEstudio = agregarEstudio;
+var agregarTrabajo = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (persona) {
+            persona.per_trab.push(req.body);
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: 'Se agrego el trabajo correctamente'
+            });
+        }
+        else {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: 'No se pudo agregar el trabajo'
+            });
+        }
+    });
+};
+exports.agregarTrabajo = agregarTrabajo;

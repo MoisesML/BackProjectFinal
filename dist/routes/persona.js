@@ -9,3 +9,6 @@ exports.persona_router.post('/login', persona_1.loginPersona);
 exports.persona_router.get('/personas', persona_1.devolverPersonas);
 exports.persona_router.get('/persona/:id', persona_1.devolverPersona);
 exports.persona_router.put('/editar/:id', persona_1.editarPersona);
+exports.persona_router.post('/trabajo/:id', persona_1.agregarTrabajo);
+exports.persona_router.post('/telefono/:id', persona_1.agregarFono);
+exports.persona_router.post('/estudio/:id', persona_1.agregarEstudio);
