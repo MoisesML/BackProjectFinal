@@ -10,14 +10,14 @@ var crearPersona = (req, res) => {
             res.status(500).json({
                 ok: false,
                 content: error,
-                message: 'Hubo un error al registrar a la persona'
+                message: "Hubo un error al registrar a la persona",
             });
         }
         else {
             res.status(201).json({
                 ok: true,
                 content: nuevaPersona,
-                message: 'Persona registrada exitosamente'
+                message: "Persona registrada exitosamente",
             });
         }
     });
@@ -30,23 +30,23 @@ var loginPersona = (req, res) => {
             let validacion = persona.validarContraseña(password);
             if (validacion) {
                 let token = persona.generarJWT();
-                let nombre = persona.per_nomb + ' ' + persona.per_apel;
+                let nombre = persona.per_nomb + " " + persona.per_apel;
                 let id = persona._id;
                 res.json({
                     ok: true,
                     content: {
                         nombre,
                         id,
-                        token
+                        token,
                     },
-                    message: 'Bienvenido'
+                    message: "Bienvenido",
                 });
             }
             else {
                 res.json({
                     ok: false,
                     content: null,
-                    message: 'Contraseña incorrecta'
+                    message: "Contraseña incorrecta",
                 });
             }
         }
@@ -54,7 +54,7 @@ var loginPersona = (req, res) => {
             res.status(200).json({
                 ok: false,
                 content: null,
-                message: 'Usuario inexistente o usuario de empresa'
+                message: "Usuario inexistente o usuario de empresa",
             });
         }
     });
@@ -66,14 +66,14 @@ var devolverPersonas = (req, res) => {
             res.status(500).json({
                 ok: false,
                 content: error,
-                message: 'Hubo un error al traer los usuarios'
+                message: "Hubo un error al traer los usuarios",
             });
         }
         else {
             res.json({
                 ok: true,
                 content: personas,
-                message: null
+                message: null,
             });
         }
     });
@@ -86,14 +86,14 @@ var devolverPersona = (req, res) => {
             res.json({
                 ok: false,
                 content: null,
-                message: 'No se encontro la persona'
+                message: "No se encontro la persona",
             });
         }
         else {
             res.json({
                 ok: true,
                 content: persona,
-                message: 'Se encontro la persona'
+                message: "Se encontro la persona",
             });
         }
     });
@@ -106,14 +106,14 @@ var editarPersona = (req, res) => {
             res.status(200).json({
                 ok: false,
                 content: error,
-                message: 'Hubo un error al actualizar el usuario'
+                message: "Hubo un error al actualizar el usuario",
             });
         }
         else {
             res.status(200).json({
                 ok: true,
                 content: usuarioActualizado,
-                message: 'Se actualizo exitosamente el usuario'
+                message: "Se actualizo exitosamente el usuario",
             });
         }
     });
@@ -122,20 +122,20 @@ exports.editarPersona = editarPersona;
 var agregarFono = (req, res) => {
     let { id } = req.params;
     mongoose_1.Persona.findById(id, (error, persona) => {
-        if (persona) {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo agregar el fono",
+            });
+        }
+        else {
             persona.per_fonos.push(req.body);
             persona.save();
             res.status(201).json({
                 ok: true,
                 content: persona,
-                message: 'Se agrego el fono correctamente'
-            });
-        }
-        else {
-            res.status(200).json({
-                ok: false,
-                content: error,
-                message: 'No se pudo agregar el fono'
+                message: "Se agrego el fono correctamente",
             });
         }
     });
@@ -144,20 +144,20 @@ exports.agregarFono = agregarFono;
 var agregarEstudio = (req, res) => {
     let { id } = req.params;
     mongoose_1.Persona.findById(id, (error, persona) => {
-        if (persona) {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo agregar el estudio",
+            });
+        }
+        else {
             persona.per_estu.push(req.body);
             persona.save();
             res.status(201).json({
                 ok: true,
                 content: persona,
-                message: 'Se agrego el estudio correctamente'
-            });
-        }
-        else {
-            res.status(200).json({
-                ok: false,
-                content: error,
-                message: 'No se pudo agregar el estudio'
+                message: "Se agrego el estudio correctamente",
             });
         }
     });
@@ -166,20 +166,20 @@ exports.agregarEstudio = agregarEstudio;
 var agregarTrabajo = (req, res) => {
     let { id } = req.params;
     mongoose_1.Persona.findById(id, (error, persona) => {
-        if (persona) {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo agregar el trabajo",
+            });
+        }
+        else {
             persona.per_trab.push(req.body);
             persona.save();
             res.status(201).json({
                 ok: true,
                 content: persona,
-                message: 'Se agrego el trabajo correctamente'
-            });
-        }
-        else {
-            res.status(200).json({
-                ok: false,
-                content: error,
-                message: 'No se pudo agregar el trabajo'
+                message: "Se agrego el trabajo correctamente",
             });
         }
     });
