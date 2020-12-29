@@ -24,8 +24,8 @@ var crearEmpresa = (req, res) => {
 };
 exports.crearEmpresa = crearEmpresa;
 var loginEmpresa = (req, res) => {
-    let { correo, password } = req.body;
-    mongoose_1.Empresa.findOne({ emp_emal: correo }, (error, empresa) => {
+    let { email, password } = req.body;
+    mongoose_1.Empresa.findOne({ emp_emal: email }, (error, empresa) => {
         if (empresa) {
             let validacion = empresa.validarContraseña(password);
             if (validacion) {

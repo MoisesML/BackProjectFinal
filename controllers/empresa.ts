@@ -23,8 +23,8 @@ export var crearEmpresa = (req:Request, res:Response) => {
 };
 
 export var loginEmpresa = (req:Request, res:Response) => {
-    let { correo, password } = req.body;
-    Empresa.findOne({emp_emal : correo}, (error:any, empresa:any) => {
+    let { email, password } = req.body;
+    Empresa.findOne({emp_emal : email}, (error:any, empresa:any) => {
         if (empresa) {
             let validacion = empresa.validarContraseña(password);
             if (validacion) {
