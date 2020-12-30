@@ -38,11 +38,11 @@ var estudioSchema = new Schema ({
 
 var trabajoSchema = new Schema ({
     trab_pue : {
-        type:String,
+        type : String,
         required : true
     },
     trab_emp : {
-        type:String,
+        type : String,
         required : true
     },
     trab_ini : {
