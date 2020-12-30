@@ -78,7 +78,7 @@ exports.personaSchema = new mongoose_1.Schema({
         type: String,
     },
     per_fnac: {
-        type: Date,
+        type: String,
     },
     per_dire: {
         type: String,
@@ -95,6 +95,9 @@ exports.personaSchema = new mongoose_1.Schema({
     per_pref: [
         { per_puesto: String }
     ],
+    per_img: {
+        type: String
+    },
     per_salt: String,
     per_hash: String
 }, {

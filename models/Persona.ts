@@ -77,7 +77,7 @@ export var personaSchema = new Schema ({
         type : String,
     },
     per_fnac : {
-        type : Date,
+        type : String,
     },
     per_dire : {
         type : String,
@@ -94,6 +94,9 @@ export var personaSchema = new Schema ({
     per_pref : [
         {per_puesto : String}
     ],
+    per_img : {
+        type : String
+    },
     per_salt : String,
     per_hash : String
 } , {

@@ -8,7 +8,7 @@ var postulanteSchema = new mongoose_1.Schema({
         required: true
     },
     post_cv: {
-        type: Boolean,
+        type: String,
         required: true,
         default: false
     }
@@ -42,5 +42,11 @@ exports.anuncioSchema = new mongoose_1.Schema({
     anun_esta: {
         type: String,
         default: true
+    },
+    anun_inic: {
+        type: String
+    },
+    anun_fin: {
+        type: String
     }
 });

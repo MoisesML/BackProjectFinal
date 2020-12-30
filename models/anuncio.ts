@@ -6,7 +6,7 @@ var postulanteSchema = new Schema ({
         required : true
     },
     post_cv : {
-        type : Boolean,
+        type : String,
         required : true,
         default : false
     }
@@ -42,5 +42,11 @@ export var anuncioSchema = new Schema ({
     anun_esta : {
         type : String,
         default : true
+    },
+    anun_inic : {
+        type : String
+    },
+    anun_fin : {
+        type : String
     }
 })

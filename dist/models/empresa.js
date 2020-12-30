@@ -30,6 +30,9 @@ exports.empresaSchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
+    emp_img: {
+        type: String
+    },
     // Falta agragar los favroitos de cada empresa
     emp_salt: String,
     emp_hash: String
