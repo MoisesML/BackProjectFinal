@@ -46,11 +46,11 @@ var trabajoSchema = new Schema ({
         required : true
     },
     trab_ini : {
-        type : Date,
+        type : String,
         required : true
     },
     trab_fin : {
-        type : Date,
+        type : String,
         required : true
     },
     trab_func : {
