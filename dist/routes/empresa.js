@@ -7,3 +7,4 @@ exports.empresa_router = express_1.Router();
 exports.empresa_router.post('/empresa/registro', empresa_1.crearEmpresa);
 exports.empresa_router.post('/empresa/login', empresa_1.loginEmpresa);
 exports.empresa_router.get('/empresas', empresa_1.devolverEmpresas);
+exports.empresa_router.get('/empresa/:id', empresa_1.devolverEmpresa);
