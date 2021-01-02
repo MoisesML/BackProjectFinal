@@ -7,8 +7,7 @@ var postulanteSchema = new Schema ({
     },
     post_cv : {
         type : String,
-        required : true,
-        default : false
+        required : false
     }
 })
 

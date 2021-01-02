@@ -99,3 +99,24 @@ export var anunciosContratados = (req: Request, res: Response) => {
     }
   });
 };
+
+export var agregarPostulante = (req:Request, res:Response) => {
+    let { id } = req.params;
+    Anuncio.findById(id, (error:CallbackError, anuncio:any) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo encontrar el anuncio",
+              });
+        } else {
+            anuncio.anun_post.push(req.body);
+            anuncio.save();
+            res.status(201).json({
+                ok: true,
+                content: anuncio,
+                message: "Se registro su postulación exitosamente",
+              });
+        }
+    })
+}

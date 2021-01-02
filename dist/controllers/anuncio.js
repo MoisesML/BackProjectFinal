@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.anunciosContratados = exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.traerAnuncio = exports.crearAnuncio = void 0;
+exports.agregarPostulante = exports.anunciosContratados = exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.traerAnuncio = exports.crearAnuncio = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearAnuncio = (req, res) => {
     let objAnuncio = new mongoose_1.Anuncio(req.body);
@@ -102,3 +102,25 @@ var anunciosContratados = (req, res) => {
     });
 };
 exports.anunciosContratados = anunciosContratados;
+var agregarPostulante = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Anuncio.findById(id, (error, anuncio) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo encontrar el anuncio",
+            });
+        }
+        else {
+            anuncio.anun_post.push(req.body);
+            anuncio.save();
+            res.status(201).json({
+                ok: true,
+                content: anuncio,
+                message: "Se registro su postulación exitosamente",
+            });
+        }
+    });
+};
+exports.agregarPostulante = agregarPostulante;

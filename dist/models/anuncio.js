@@ -9,8 +9,7 @@ var postulanteSchema = new mongoose_1.Schema({
     },
     post_cv: {
         type: String,
-        required: true,
-        default: false
+        required: false
     }
 });
 exports.anuncioSchema = new mongoose_1.Schema({
