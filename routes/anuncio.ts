@@ -9,4 +9,4 @@ empresa_router.get('/anuncio/:id', traerAnuncio);
 empresa_router.get('/anuncios/:id', traerAnunciosXEmpresa);
 empresa_router.get('/anuncios/keyword/:keyword', busquedaAnunciosPuesto);
 empresa_router.get('/anuncioscontratados', anunciosContratados);
-empresa_router.get('/postulante/:id', agregarPostulante);
+empresa_router.post('/postulante/:id', agregarPostulante);
