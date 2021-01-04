@@ -3,21 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.devolverEmpresa = exports.devolverEmpresas = exports.loginEmpresa = exports.crearEmpresa = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearEmpresa = (req, res) => {
-    let objEmpresa = new mongoose_1.Empresa(req.body);
-    objEmpresa.cifrarContraseña(req.body.password);
-    objEmpresa.save((error, nuevaEmpresa) => {
-        if (error) {
-            res.status(500).json({
+    let { emp_emal } = req.body;
+    mongoose_1.Empresa.findOne({ emp_emal: emp_emal }, (error, empresa) => {
+        if (empresa) {
+            res.json({
                 ok: false,
-                content: error,
-                message: "Hubo un error al registrar la empresa",
+                content: null,
+                message: "El correo ingresado ya esta en uso",
             });
         }
         else {
-            res.status(201).json({
-                ok: true,
-                content: nuevaEmpresa,
-                message: "Empresa registrada exitosamente",
+            let objEmpresa = new mongoose_1.Empresa(req.body);
+            objEmpresa.cifrarContraseña(req.body.password);
+            objEmpresa.save((error, nuevaEmpresa) => {
+                if (error) {
+                    res.status(500).json({
+                        ok: false,
+                        content: error,
+                        message: "Hubo un error al registrar la empresa",
+                    });
+                }
+                else {
+                    res.status(201).json({
+                        ok: true,
+                        content: nuevaEmpresa,
+                        message: "Empresa registrada exitosamente",
+                    });
+                }
             });
         }
     });

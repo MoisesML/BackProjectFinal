@@ -3,20 +3,31 @@ import { CallbackError } from "mongoose";
 import { Empresa } from "../config/mongoose";
 
 export var crearEmpresa = (req: Request, res: Response) => {
-  let objEmpresa: any = new Empresa(req.body);
-  objEmpresa.cifrarContraseña(req.body.password);
-  objEmpresa.save((error: CallbackError, nuevaEmpresa: Document) => {
-    if (error) {
-      res.status(500).json({
+  let { emp_emal } = req.body;
+  Empresa.findOne({ emp_emal: emp_emal }, (error: any, empresa: any) => {
+    if (empresa) {
+      res.json({
         ok: false,
-        content: error,
-        message: "Hubo un error al registrar la empresa",
+        content: null,
+        message: "El correo ingresado ya esta en uso",
       });
     } else {
-      res.status(201).json({
-        ok: true,
-        content: nuevaEmpresa,
-        message: "Empresa registrada exitosamente",
+      let objEmpresa: any = new Empresa(req.body);
+      objEmpresa.cifrarContraseña(req.body.password);
+      objEmpresa.save((error: CallbackError, nuevaEmpresa: Document) => {
+        if (error) {
+          res.status(500).json({
+            ok: false,
+            content: error,
+            message: "Hubo un error al registrar la empresa",
+          });
+        } else {
+          res.status(201).json({
+            ok: true,
+            content: nuevaEmpresa,
+            message: "Empresa registrada exitosamente",
+          });
+        }
       });
     }
   });

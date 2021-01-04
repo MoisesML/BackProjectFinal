@@ -3,21 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
-    let objPersona = new mongoose_1.Persona(req.body);
-    objPersona.cifrarContraseña(req.body.password);
-    objPersona.save((error, nuevaPersona) => {
-        if (error) {
-            res.status(500).json({
+    let { per_emal } = req.body;
+    mongoose_1.Persona.findOne({ per_emal: per_emal }, (error, persona) => {
+        if (persona) {
+            res.json({
                 ok: false,
-                content: error,
-                message: "Hubo un error al registrar a la persona",
+                content: null,
+                message: "El correo ingresado ya esta en uso",
             });
         }
         else {
-            res.status(201).json({
-                ok: true,
-                content: nuevaPersona,
-                message: "Persona registrada exitosamente",
+            let objPersona = new mongoose_1.Persona(req.body);
+            objPersona.cifrarContraseña(req.body.password);
+            objPersona.save((error, nuevaPersona) => {
+                if (error) {
+                    res.status(500).json({
+                        ok: false,
+                        content: error,
+                        message: "Hubo un error al registrar a la persona",
+                    });
+                }
+                else {
+                    res.status(201).json({
+                        ok: true,
+                        content: nuevaPersona,
+                        message: "Persona registrada exitosamente",
+                    });
+                }
             });
         }
     });
@@ -32,7 +44,7 @@ var loginPersona = (req, res) => {
                 let token = persona.generarJWT();
                 let nombre = persona.per_nomb + " " + persona.per_apel;
                 let id = persona._id;
-                let tipo = 'persona';
+                let tipo = "persona";
                 res.json({
                     ok: true,
                     content: {
@@ -187,3 +199,17 @@ var agregarTrabajo = (req, res) => {
     });
 };
 exports.agregarTrabajo = agregarTrabajo;
+// export var quitarTelefono = (req:Request, res:Response) => {
+//   let { id, idTelefono } = req.params;
+//   Persona.findById(id, (error:CallbackError, persona:any) => {
+//     if (error) {
+//       res.status(200).json({
+//         ok: false,
+//         content: error,
+//         message: "No se pudo quitar el telefono",
+//       });
+//     } else {
+//       persona.per_fonos.splice( )
+//     }
+//   })
+// }
