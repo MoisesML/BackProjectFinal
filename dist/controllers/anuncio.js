@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.agregarPostulante = exports.anunciosContratados = exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.traerAnuncio = exports.crearAnuncio = void 0;
+exports.añadirPostulante = exports.anunciosContratados = exports.busquedaAnunciosPuesto = exports.traerAnunciosXEmpresa = exports.traerAnuncio = exports.crearAnuncio = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearAnuncio = (req, res) => {
     let objAnuncio = new mongoose_1.Anuncio(req.body);
@@ -102,7 +102,7 @@ var anunciosContratados = (req, res) => {
     });
 };
 exports.anunciosContratados = anunciosContratados;
-var agregarPostulante = (req, res) => {
+var añadirPostulante = (req, res) => {
     let { id } = req.params;
     mongoose_1.Anuncio.findById(id, (error, anuncio) => {
         if (error) {
@@ -123,4 +123,4 @@ var agregarPostulante = (req, res) => {
         }
     });
 };
-exports.agregarPostulante = agregarPostulante;
+exports.añadirPostulante = añadirPostulante;

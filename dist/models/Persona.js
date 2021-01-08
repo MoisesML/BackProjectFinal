@@ -15,6 +15,10 @@ var fonoSchema = new mongoose_1.Schema({
     fono_ope: {
         type: String,
         required: true
+    },
+    fono_sta: {
+        type: String,
+        default: true
     }
 });
 var estudioSchema = new mongoose_1.Schema({
@@ -37,6 +41,10 @@ var estudioSchema = new mongoose_1.Schema({
     est_fin: {
         type: String,
         required: true
+    },
+    est_sta: {
+        type: String,
+        default: true
     }
 });
 var trabajoSchema = new mongoose_1.Schema({
@@ -59,6 +67,10 @@ var trabajoSchema = new mongoose_1.Schema({
     trab_func: {
         type: String,
         required: true
+    },
+    trab_sta: {
+        type: String,
+        default: true
     }
 });
 exports.personaSchema = new mongoose_1.Schema({
@@ -122,6 +134,6 @@ exports.personaSchema.methods.generarJWT = function () {
         per_nomb: this.per_nomb,
         per_apel: this.per_apel,
     };
-    let token = jsonwebtoken_1.sign(payload, 'proyecto', { expiresIn: 120 }, { algorithm: 'RS256' });
+    let token = jsonwebtoken_1.sign(payload, "proyecto", { expiresIn: 60000 }, { algorithm: 'RS256' });
     return token;
 };

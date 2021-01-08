@@ -1,55 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.anuncioSchema = void 0;
+exports.postulacionSchema = void 0;
 const mongoose_1 = require("mongoose");
-exports.anuncioSchema = new mongoose_1.Schema({
-    anun_psto: {
+exports.postulacionSchema = new mongoose_1.Schema({
+    post_idPe: {
         type: String,
         required: true
     },
-    anun_empr: {
+    post_nmPe: {
         type: String,
         required: true
     },
-    anun_suel: {
+    post_idAn: {
         type: String,
         required: true
     },
-    anun_emId: {
+    post_idEm: {
         type: String,
         required: true
     },
-    anun_desc: {
+    post_empr: {
         type: String,
         required: true
     },
-    anun_func: {
+    post_psto: {
         type: String,
         required: true
     },
-    anun_requ: {
+    post_cuvi: {
         type: String,
-        required: true
+        required: false
     },
-    anun_cont: {
+    post_esta: {
         type: String,
-        default: false
+        default: "Postulacion Enviada"
     },
-    anun_esta: {
+    post_sta: {
         type: String,
         default: true
-    },
-    anun_inic: {
-        type: String
-    },
-    anun_fin: {
-        type: String
-    },
-    anun_ubic: {
-        type: String,
-        required: true
-    },
-    anun_post: [
-        { per_id: String }
-    ]
+    }
 });

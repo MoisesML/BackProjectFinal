@@ -10,6 +10,10 @@ var fonoSchema = new Schema ({
     fono_ope : {
         type : String,
         required : true
+    },
+    fono_sta : {
+        type : String,
+        default : true
     }
 })
 
@@ -33,6 +37,10 @@ var estudioSchema = new Schema ({
     est_fin : {
         type : String,
         required : true
+    },
+    est_sta : {
+        type : String,
+        default : true
     }
 })
 
@@ -56,8 +64,11 @@ var trabajoSchema = new Schema ({
     trab_func : {
         type : String,
         required : true
+    },
+    trab_sta : {
+        type : String,
+        default : true
     }
-
 })
 
 export var personaSchema = new Schema ({
@@ -123,6 +134,6 @@ personaSchema.methods.generarJWT = function () {
         per_nomb : this.per_nomb,
         per_apel : this.per_apel,
     }
-    let token = sign(payload, 'proyecto', {expiresIn : 120}, {algorithm:'RS256'});
+    let token = sign(payload, "proyecto", {expiresIn : 60000}, {algorithm:'RS256'});
     return token;
 }

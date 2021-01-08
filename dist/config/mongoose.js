@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Anuncio = exports.Empresa = exports.Persona = void 0;
+exports.Postulacion = exports.Anuncio = exports.Empresa = exports.Persona = void 0;
 const mongoose_1 = require("mongoose");
 const Persona_1 = require("../models/Persona");
 const empresa_1 = require("../models/empresa");
 const anuncio_1 = require("../models/anuncio");
+const postulacion_1 = require("../models/postulacion");
 exports.Persona = mongoose_1.model('persona', Persona_1.personaSchema);
 exports.Empresa = mongoose_1.model('empresa', empresa_1.empresaSchema);
 exports.Anuncio = mongoose_1.model('anuncio', anuncio_1.anuncioSchema);
+exports.Postulacion = mongoose_1.model('postulacion', postulacion_1.postulacionSchema);

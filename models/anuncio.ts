@@ -1,16 +1,5 @@
 import { Schema } from 'mongoose';
 
-var postulanteSchema = new Schema ({
-    post_id : {
-        type : String,
-        required : true
-    },
-    post_cv : {
-        type : String,
-        required : false
-    }
-})
-
 export var anuncioSchema = new Schema ({
     anun_psto : {
         type : String,
@@ -20,20 +9,26 @@ export var anuncioSchema = new Schema ({
         type : String,
         required : true
     },
+    anun_suel : {
+        type : String,
+        required : true
+    },
     anun_emId : {
         type : String,
         required : true
     },
     anun_desc : {
         type : String,
-        // required : true
+        required : true
     },
-    anun_post : [
-        postulanteSchema
-    ],
-    anun_esco : [
-        { pers_id : String }
-    ],
+    anun_func : {
+        type : String,
+        required : true
+    },
+    anun_requ: {
+        type : String,
+        required : true
+    },
     anun_cont : {
         type : String,
         default : false
@@ -47,5 +42,12 @@ export var anuncioSchema = new Schema ({
     },
     anun_fin : {
         type : String
-    }
+    },
+    anun_ubic : {
+        type : String,
+        required : true
+    },
+    anun_post : [
+        {per_id : String}
+    ]
 })

@@ -100,7 +100,7 @@ export var anunciosContratados = (req: Request, res: Response) => {
   });
 };
 
-export var agregarPostulante = (req:Request, res:Response) => {
+export var añadirPostulante = (req:Request, res:Response) => {
     let { id } = req.params;
     Anuncio.findById(id, (error:CallbackError, anuncio:any) => {
         if (error) {

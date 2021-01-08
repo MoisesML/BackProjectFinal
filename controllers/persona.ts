@@ -151,6 +151,7 @@ export var agregarFono = (req: Request, res: Response) => {
     }
   });
 };
+
 export var agregarEstudio = (req: Request, res: Response) => {
   let { id } = req.params;
   Persona.findById(id, (error: CallbackError, persona: any) => {
@@ -171,6 +172,7 @@ export var agregarEstudio = (req: Request, res: Response) => {
     }
   });
 };
+
 export var agregarTrabajo = (req: Request, res: Response) => {
   let { id } = req.params;
   Persona.findById(id, (error: CallbackError, persona: any) => {
@@ -192,17 +194,75 @@ export var agregarTrabajo = (req: Request, res: Response) => {
   });
 };
 
-// export var quitarTelefono = (req:Request, res:Response) => {
-//   let { id, idTelefono } = req.params;
-//   Persona.findById(id, (error:CallbackError, persona:any) => {
-//     if (error) {
-//       res.status(200).json({
-//         ok: false,
-//         content: error,
-//         message: "No se pudo quitar el telefono",
-//       });
-//     } else {
-//       persona.per_fonos.splice( )
-//     }
-//   })
-// }
+export var editarFono = (req: Request, res: Response) => {
+  let { id, idFono } = req.params;
+  let { fono_num:numero, fono_ope:operador} = req.body;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo quitar el telefono",
+      });
+    } else {
+      let telefonos = persona.per_fonos;
+      let nuevoFonos = telefonos.map((tel:any, i:any) => {
+        let { _id, fono_num, fono_ope } = tel;
+        if (_id == idFono) {
+          fono_num = numero;
+          fono_ope = operador;
+          return {
+            _id,
+            fono_num,
+            fono_ope,
+          };
+        } else {
+          return tel;
+        }
+      });
+      persona.per_fonos = nuevoFonos;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se edito correctamente",
+      });
+    }
+  });
+};
+
+export var eliminarFono = (req: Request, res: Response) => {
+  let { id, idFono } = req.params;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo quitar el telefono",
+      });
+    } else {
+      let telefonos = persona.per_fonos;
+      let nuevoFonos = telefonos.map((tel:any, i:any) => {
+        let { _id, fono_num, fono_ope, fono_sta } = tel;
+        if (_id == idFono) {
+          fono_sta = "false"
+          return {
+            _id,
+            fono_num,
+            fono_ope,
+            fono_sta
+          };
+        } else {
+          return tel;
+        }
+      });
+      persona.per_fonos = nuevoFonos;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se elimino el telefono correctamente",
+      });
+    }
+  });
+};

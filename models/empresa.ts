@@ -9,11 +9,9 @@ export var empresaSchema = new Schema ({
     },
     emp_rsoc : {
         type : String,
-        // required : true
     },
     emp_ruc : {
-        type : String,
-        required : true
+        type : String
     },
     emp_rubr : {
         type : String,
@@ -21,7 +19,9 @@ export var empresaSchema = new Schema ({
     },
     emp_dire : {
         type : String,
-        // required : true
+    },
+    emp_ubic : {
+        type : String
     },
     emp_emal : {
         type : String,
@@ -30,7 +30,6 @@ export var empresaSchema = new Schema ({
     emp_img : {
         type : String
     },
-// Falta agragar los favroitos de cada empresa
     emp_salt : String,
     emp_hash : String
 }, {

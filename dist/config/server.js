@@ -9,6 +9,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const persona_1 = require("../routes/persona");
 const empresa_1 = require("../routes/empresa");
 const anuncio_1 = require("../routes/anuncio");
+const postulacion_1 = require("../routes/postulacion");
 var cors = require('cors');
 class Server {
     constructor() {
@@ -33,7 +34,7 @@ class Server {
         this.app.get('/', (req, res) => {
             res.send('Bienvenido a la API-Proyecto');
         });
-        this.app.use('', persona_1.persona_router, empresa_1.empresa_router, anuncio_1.anuncio_router);
+        this.app.use('', persona_1.persona_router, empresa_1.empresa_router, anuncio_1.anuncio_router, postulacion_1.postulacion_router);
     }
     iniciarServidor() {
         this.app.listen(this.puerto, () => {

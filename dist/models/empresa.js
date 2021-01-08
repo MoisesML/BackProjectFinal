@@ -16,8 +16,7 @@ exports.empresaSchema = new mongoose_1.Schema({
         type: String,
     },
     emp_ruc: {
-        type: String,
-        required: true
+        type: String
     },
     emp_rubr: {
         type: String,
@@ -26,6 +25,9 @@ exports.empresaSchema = new mongoose_1.Schema({
     emp_dire: {
         type: String,
     },
+    emp_ubic: {
+        type: String
+    },
     emp_emal: {
         type: String,
         required: true
@@ -33,7 +35,6 @@ exports.empresaSchema = new mongoose_1.Schema({
     emp_img: {
         type: String
     },
-    // Falta agragar los favroitos de cada empresa
     emp_salt: String,
     emp_hash: String
 }, {

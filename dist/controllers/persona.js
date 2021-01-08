@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
+exports.eliminarFono = exports.editarFono = exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
     let { per_emal } = req.body;
@@ -199,17 +199,80 @@ var agregarTrabajo = (req, res) => {
     });
 };
 exports.agregarTrabajo = agregarTrabajo;
-// export var quitarTelefono = (req:Request, res:Response) => {
-//   let { id, idTelefono } = req.params;
-//   Persona.findById(id, (error:CallbackError, persona:any) => {
-//     if (error) {
-//       res.status(200).json({
-//         ok: false,
-//         content: error,
-//         message: "No se pudo quitar el telefono",
-//       });
-//     } else {
-//       persona.per_fonos.splice( )
-//     }
-//   })
-// }
+var editarFono = (req, res) => {
+    let { id, idFono } = req.params;
+    let { fono_num: numero, fono_ope: operador } = req.body;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo quitar el telefono",
+            });
+        }
+        else {
+            let telefonos = persona.per_fonos;
+            let nuevoFonos = telefonos.map((tel, i) => {
+                let { _id, fono_num, fono_ope } = tel;
+                if (_id == idFono) {
+                    fono_num = numero;
+                    fono_ope = operador;
+                    return {
+                        _id,
+                        fono_num,
+                        fono_ope,
+                    };
+                }
+                else {
+                    return tel;
+                }
+            });
+            persona.per_fonos = nuevoFonos;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se edito correctamente",
+            });
+        }
+    });
+};
+exports.editarFono = editarFono;
+var eliminarFono = (req, res) => {
+    let { id, idFono } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo quitar el telefono",
+            });
+        }
+        else {
+            let telefonos = persona.per_fonos;
+            let nuevoFonos = telefonos.map((tel, i) => {
+                let { _id, fono_num, fono_ope, fono_sta } = tel;
+                if (_id == idFono) {
+                    fono_sta = "false";
+                    return {
+                        _id,
+                        fono_num,
+                        fono_ope,
+                        fono_sta
+                    };
+                }
+                else {
+                    return tel;
+                }
+            });
+            persona.per_fonos = nuevoFonos;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se elimino el telefono correctamente",
+            });
+        }
+    });
+};
+exports.eliminarFono = eliminarFono;
