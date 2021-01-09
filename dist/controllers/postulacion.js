@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postulacionExacta = exports.postulacionesPersona = exports.postulacionAnuncio = exports.agregarPostulante = void 0;
+exports.postulacionExacta = exports.postulacionesEmpresa = exports.postulacionesPersona = exports.postulacionAnuncio = exports.agregarPostulante = void 0;
 const mongoose_1 = require("../config/mongoose");
 var agregarPostulante = (req, res) => {
     let { id } = req.params;
@@ -51,7 +51,7 @@ var postulacionAnuncio = (req, res) => {
             res.json({
                 ok: false,
                 content: null,
-                message: "No se encontro anuncios contratados",
+                message: "No se encontro postulantes",
             });
         }
     });
@@ -77,6 +77,26 @@ var postulacionesPersona = (req, res) => {
     });
 };
 exports.postulacionesPersona = postulacionesPersona;
+var postulacionesEmpresa = (req, res) => {
+    let { id } = req.params;
+    mongoose_1.Postulacion.find({ post_idEm: id }, (error, postulaciones) => {
+        if (postulaciones) {
+            res.json({
+                ok: true,
+                content: postulaciones,
+                message: "Estos son las postulaciones de la empresa",
+            });
+        }
+        else {
+            res.json({
+                ok: false,
+                content: null,
+                message: "No se encontro anuncios de la empresa",
+            });
+        }
+    });
+};
+exports.postulacionesEmpresa = postulacionesEmpresa;
 var postulacionExacta = (req, res) => {
     let { id, idAn } = req.params;
     mongoose_1.Postulacion.findOne({ post_idPe: id, post_idAn: idAn }, (error, postulacion) => {

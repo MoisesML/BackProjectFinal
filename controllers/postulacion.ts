@@ -51,7 +51,7 @@ export var postulacionAnuncio = (req: Request, res: Response) => {
         res.json({
           ok: false,
           content: null,
-          message: "No se encontro anuncios contratados",
+          message: "No se encontro postulantes",
         });
       }
     }
@@ -74,6 +74,28 @@ export var postulacionesPersona = (req: Request, res: Response) => {
           ok: false,
           content: null,
           message: "No se encontro anuncios contratados",
+        });
+      }
+    }
+  );
+};
+
+export var postulacionesEmpresa = (req: Request, res: Response) => {
+  let { id } = req.params;
+  Postulacion.find(
+    { post_idEm: id },
+    (error: CallbackError, postulaciones: any) => {
+      if (postulaciones) {
+        res.json({
+          ok: true,
+          content: postulaciones,
+          message: "Estos son las postulaciones de la empresa",
+        });
+      } else {
+        res.json({
+          ok: false,
+          content: null,
+          message: "No se encontro anuncios de la empresa",
         });
       }
     }

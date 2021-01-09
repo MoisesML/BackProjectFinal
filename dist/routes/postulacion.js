@@ -9,4 +9,5 @@ exports.postulacion_router.post('/postulante/:id', Validador_1.controladorPerson
 exports.postulacion_router.get('/postulantes/anuncio/:id', postulacion_1.postulacionAnuncio);
 exports.postulacion_router.get('/postulaciones/persona/:id', Validador_1.controladorPersona, postulacion_1.postulacionesPersona);
 exports.postulacion_router.get('/postulacion/:id/:idAn', Validador_1.controladorPersona, postulacion_1.postulacionExacta);
+exports.postulacion_router.get('/postulaciones/empresa/:id', Validador_1.controladorEmpresa, postulacion_1.postulacionesEmpresa);
 // Actualizar estado de postulacion
