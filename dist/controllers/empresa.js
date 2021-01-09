@@ -17,7 +17,7 @@ var crearEmpresa = (req, res) => {
             objEmpresa.cifrarContraseña(req.body.password);
             objEmpresa.save((error, nuevaEmpresa) => {
                 if (error) {
-                    res.status(500).json({
+                    res.status(200).json({
                         ok: false,
                         content: error,
                         message: "Hubo un error al registrar la empresa",
@@ -57,7 +57,7 @@ var loginEmpresa = (req, res) => {
                 });
             }
             else {
-                res.status(400).json({
+                res.status(200).json({
                     ok: false,
                     content: null,
                     message: "Contraseña incorrecta",
@@ -65,7 +65,7 @@ var loginEmpresa = (req, res) => {
             }
         }
         else {
-            res.status(404).json({
+            res.status(200).json({
                 ok: false,
                 content: error,
                 message: "Usuario inexistente",
@@ -77,7 +77,7 @@ exports.loginEmpresa = loginEmpresa;
 var devolverEmpresas = (req, res) => {
     mongoose_1.Empresa.find((error, empresas) => {
         if (error) {
-            res.status(500).json({
+            res.status(200).json({
                 ok: false,
                 content: error,
                 message: "Hubo un error al traer los usuarios",

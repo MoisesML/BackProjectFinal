@@ -17,7 +17,7 @@ var crearPersona = (req, res) => {
             objPersona.cifrarContraseña(req.body.password);
             objPersona.save((error, nuevaPersona) => {
                 if (error) {
-                    res.status(500).json({
+                    res.status(200).json({
                         ok: false,
                         content: error,
                         message: "Hubo un error al registrar a la persona",
@@ -77,7 +77,7 @@ exports.loginPersona = loginPersona;
 var devolverPersonas = (req, res) => {
     mongoose_1.Persona.find((error, personas) => {
         if (error) {
-            res.status(500).json({
+            res.status(200).json({
                 ok: false,
                 content: error,
                 message: "Hubo un error al traer los usuarios",

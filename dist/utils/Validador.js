@@ -52,21 +52,21 @@ var controladorEmpresa = (req, res, next) => {
                 next();
             }
             else {
-                res.status(401).json({
+                res.status(200).json({
                     ok: false,
                     message: "No tiene permitido realizar esta peticion",
                 });
             }
         }
         else {
-            res.status(401).json({
+            res.status(200).json({
                 ok: false,
                 message: "Token vencido o presenta algun fallo",
             });
         }
     }
     else {
-        res.status(401).json({
+        res.status(200).json({
             ok: false,
             message: "Necesitas estar autenticado para realizar esta peticion",
         });

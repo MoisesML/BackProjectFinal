@@ -16,7 +16,7 @@ export var crearPersona = (req: Request, res: Response) => {
       objPersona.cifrarContraseña(req.body.password);
       objPersona.save((error: CallbackError, nuevaPersona: Document) => {
         if (error) {
-          res.status(500).json({
+          res.status(200).json({
             ok: false,
             content: error,
             message: "Hubo un error al registrar a la persona",
@@ -73,7 +73,7 @@ export var loginPersona = (req: Request, res: Response) => {
 export var devolverPersonas = (req: Request, res: Response) => {
   Persona.find((error: any, personas: any) => {
     if (error) {
-      res.status(500).json({
+      res.status(200).json({
         ok: false,
         content: error,
         message: "Hubo un error al traer los usuarios",

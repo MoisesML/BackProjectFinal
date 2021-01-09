@@ -16,7 +16,7 @@ export var crearEmpresa = (req: Request, res: Response) => {
       objEmpresa.cifrarContraseña(req.body.password);
       objEmpresa.save((error: CallbackError, nuevaEmpresa: Document) => {
         if (error) {
-          res.status(500).json({
+          res.status(200).json({
             ok: false,
             content: error,
             message: "Hubo un error al registrar la empresa",
@@ -54,14 +54,14 @@ export var loginEmpresa = (req: Request, res: Response) => {
           message: "Bienvenido",
         });
       } else {
-        res.status(400).json({
+        res.status(200).json({
           ok: false,
           content: null,
           message: "Contraseña incorrecta",
         });
       }
     } else {
-      res.status(404).json({
+      res.status(200).json({
         ok: false,
         content: error,
         message: "Usuario inexistente",
@@ -73,7 +73,7 @@ export var loginEmpresa = (req: Request, res: Response) => {
 export var devolverEmpresas = (req: Request, res: Response) => {
   Empresa.find((error: any, empresas: any) => {
     if (error) {
-      res.status(500).json({
+      res.status(200).json({
         ok: false,
         content: error,
         message: "Hubo un error al traer los usuarios",
