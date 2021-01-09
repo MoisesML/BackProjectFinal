@@ -11,11 +11,11 @@ exports.persona_router.get('/personas', persona_1.devolverPersonas);
 exports.persona_router.get('/persona/:id', persona_1.devolverPersona);
 exports.persona_router.put('/editar/:id', Validador_1.controladorPersona, persona_1.editarPersona);
 exports.persona_router.put('/fono/:id/:idFono', Validador_1.controladorPersona, persona_1.editarFono);
-// fALTA EDITAR LOS TRABAJOS Y ESTUDIOS
+exports.persona_router.put('/estudio/:id/:idEstudio', Validador_1.controladorPersona, persona_1.editarEstudio);
+exports.persona_router.put('/trabajo/:id/:idTrabajo', Validador_1.controladorPersona, persona_1.editarTrabajo);
 exports.persona_router.post('/trabajo/:id', Validador_1.controladorPersona, persona_1.agregarTrabajo);
 exports.persona_router.post('/telefono/:id', Validador_1.controladorPersona, persona_1.agregarFono);
 exports.persona_router.post('/estudio/:id', Validador_1.controladorPersona, persona_1.agregarEstudio);
 exports.persona_router.delete('/eliminarFono/:id/:idFono', Validador_1.controladorPersona, persona_1.eliminarFono);
-exports.persona_router.delete('/eliminarFono/:id/:idTrabajo', Validador_1.controladorPersona, persona_1.eliminarTrabajo);
-exports.persona_router.delete('/eliminarFono/:id/:idEstudio', Validador_1.controladorPersona, persona_1.eliminarEstudio);
-// FALTA ELIMINAR LOS TRABAJOS Y ESTUDIOS
+exports.persona_router.delete('/eliminarTrabajo/:id/:idTrabajo', Validador_1.controladorPersona, persona_1.eliminarTrabajo);
+exports.persona_router.delete('/eliminarEstudio/:id/:idEstudio', Validador_1.controladorPersona, persona_1.eliminarEstudio);

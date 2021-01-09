@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarTrabajo = exports.eliminarEstudio = exports.eliminarFono = exports.editarFono = exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
+exports.eliminarTrabajo = exports.eliminarEstudio = exports.eliminarFono = exports.editarTrabajo = exports.editarEstudio = exports.editarFono = exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
     let { per_emal } = req.body;
@@ -238,6 +238,86 @@ var editarFono = (req, res) => {
     });
 };
 exports.editarFono = editarFono;
+var editarEstudio = (req, res) => {
+    let { id, idEstudio } = req.params;
+    let { est_nom: Nombre, est_nvl: Nivel, est_inst: Institucion, est_ini: Inicio, est_fin: Fin } = req.body;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo editar el estudio",
+            });
+        }
+        else {
+            let estudios = persona.per_estu;
+            let nuevoEstudios = estudios.map((est, i) => {
+                let { _id, est_nom, est_nvl, est_inst, est_ini, est_fin } = est;
+                if (_id == idEstudio) {
+                    est_nom = Nombre,
+                        est_nvl = Nivel,
+                        est_inst = Institucion,
+                        est_ini = Inicio,
+                        est_fin = Fin;
+                    return {
+                        _id, est_nom, est_nvl, est_inst, est_ini, est_fin
+                    };
+                }
+                else {
+                    return est;
+                }
+            });
+            persona.per_estu = nuevoEstudios;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se edito correctamente el estudio",
+            });
+        }
+    });
+};
+exports.editarEstudio = editarEstudio;
+var editarTrabajo = (req, res) => {
+    let { id, idTrabajo } = req.params;
+    let { trab_pue: Puesto, trab_emp: Empresa, trab_ini: Inicio, trab_fin: Fin, trab_func: Funciones } = req.body;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo editar el trabajo",
+            });
+        }
+        else {
+            let trabajos = persona.per_trab;
+            let nuevoTrabajos = trabajos.map((trab, i) => {
+                let { _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func } = trab;
+                if (_id == idTrabajo) {
+                    trab_pue = Puesto,
+                        trab_emp = Empresa,
+                        trab_ini = Inicio,
+                        trab_fin = Fin,
+                        trab_func = Funciones;
+                    return {
+                        _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func
+                    };
+                }
+                else {
+                    return trab;
+                }
+            });
+            persona.per_trab = nuevoTrabajos;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se edito correctamente el trabajo",
+            });
+        }
+    });
+};
+exports.editarTrabajo = editarTrabajo;
 var eliminarFono = (req, res) => {
     let { id, idFono } = req.params;
     mongoose_1.Persona.findById(id, (error, persona) => {
@@ -338,7 +418,7 @@ var eliminarTrabajo = (req, res) => {
                     };
                 }
                 else {
-                    return est;
+                    return trab;
                 }
             });
             persona.per_trab = nuevoTrabajos;

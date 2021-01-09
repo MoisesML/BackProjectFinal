@@ -231,6 +231,82 @@ export var editarFono = (req: Request, res: Response) => {
   });
 };
 
+export var editarEstudio = (req: Request, res: Response) => {
+  let { id, idEstudio } = req.params;
+  let { est_nom:Nombre, est_nvl:Nivel, est_inst:Institucion, est_ini:Inicio, est_fin:Fin } = req.body;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo editar el estudio",
+      });
+    } else {
+      let estudios = persona.per_estu;
+      let nuevoEstudios = estudios.map((est: any, i: any) => {
+        let { _id, est_nom, est_nvl, est_inst, est_ini, est_fin } = est;
+        if (_id == idEstudio) {
+          est_nom = Nombre,
+          est_nvl = Nivel,
+          est_inst = Institucion,
+          est_ini = Inicio,
+          est_fin = Fin
+          return {
+            _id,est_nom, est_nvl, est_inst, est_ini, est_fin
+          };
+        } else {
+          return est;
+        }
+      });
+      persona.per_estu = nuevoEstudios;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se edito correctamente el estudio",
+      });
+    }
+  });
+};
+
+export var editarTrabajo = (req: Request, res: Response) => {
+  let { id, idTrabajo } = req.params;
+  let { trab_pue:Puesto, trab_emp:Empresa, trab_ini:Inicio, trab_fin:Fin, trab_func:Funciones } = req.body;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo editar el trabajo",
+      });
+    } else {
+      let trabajos = persona.per_trab;
+      let nuevoTrabajos = trabajos.map((trab: any, i: any) => {
+        let { _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func } = trab;
+        if (_id == idTrabajo) {
+          trab_pue = Puesto,
+          trab_emp = Empresa,
+          trab_ini = Inicio,
+          trab_fin = Fin,
+          trab_func = Funciones
+          return {
+            _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func
+          };
+        } else {
+          return trab;
+        }
+      });
+      persona.per_trab = nuevoTrabajos;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se edito correctamente el trabajo",
+      });
+    }
+  });
+};
+
 export var eliminarFono = (req: Request, res: Response) => {
   let { id, idFono } = req.params;
   Persona.findById(id, (error: CallbackError, persona: any) => {
@@ -336,7 +412,7 @@ export var eliminarTrabajo = (req: Request, res: Response) => {
             _id,trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta
           };
         } else {
-          return est;
+          return trab;
         }
       });
       persona.per_trab = nuevoTrabajos;
