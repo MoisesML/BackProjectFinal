@@ -58,6 +58,7 @@ exports.empresaSchema.methods.generarJWT = function () {
         emp_id: this._id,
         emp_nomb: this.emp_nomb,
         emp_ruc: this.emp_ruc,
+        tipo: "empresa"
     };
     let token = jsonwebtoken_1.sign(payload, 'proyecto', { expiresIn: 120 }, { algorithm: 'RS256' });
     return token;

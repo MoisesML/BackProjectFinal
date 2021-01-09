@@ -133,6 +133,7 @@ personaSchema.methods.generarJWT = function () {
         per_id : this._id,
         per_nomb : this.per_nomb,
         per_apel : this.per_apel,
+        tipo : "persona"
     }
     let token = sign(payload, "proyecto", {expiresIn : 60000}, {algorithm:'RS256'});
     return token;

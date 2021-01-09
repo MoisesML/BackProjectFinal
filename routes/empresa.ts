@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { crearEmpresa, devolverEmpresas, loginEmpresa, devolverEmpresa } from '../controllers/empresa';
-import { controlador } from "../utils/Validador";
 
 export var empresa_router = Router();
 
