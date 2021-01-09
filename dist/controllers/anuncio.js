@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.añadirPostulante = exports.anunciosContratados = exports.busquedaAnunciosLugar = exports.busquedaAnunciosPuesto = exports.busquedaAnunciosPuestoLugar = exports.traerAnunciosXEmpresa = exports.traerAnuncio = exports.crearAnuncio = void 0;
+exports.añadirPostulante = exports.anunciosContratados = exports.busquedaAnunciosLugar = exports.busquedaAnunciosPuesto = exports.busquedaAnunciosPuestoLugar = exports.traerAnunciosXEmpresa = exports.devolverAnuncios = exports.traerAnuncio = exports.crearAnuncio = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearAnuncio = (req, res) => {
     let objAnuncio = new mongoose_1.Anuncio(req.body);
@@ -42,6 +42,25 @@ var traerAnuncio = (req, res) => {
     });
 };
 exports.traerAnuncio = traerAnuncio;
+var devolverAnuncios = (req, res) => {
+    mongoose_1.Anuncio.find((error, anuncios) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "Hubo un error al traer los anuncios",
+            });
+        }
+        else {
+            res.json({
+                ok: true,
+                content: anuncios,
+                message: null,
+            });
+        }
+    });
+};
+exports.devolverAnuncios = devolverAnuncios;
 var traerAnunciosXEmpresa = (req, res) => {
     let { id } = req.params;
     mongoose_1.Anuncio.find({ anun_emId: id }, (error, anuncios) => {

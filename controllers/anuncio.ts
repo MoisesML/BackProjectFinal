@@ -40,6 +40,24 @@ export var traerAnuncio = (req: Request, res: Response) => {
   });
 };
 
+export var devolverAnuncios = (req: Request, res: Response) => {
+  Anuncio.find((error: any, anuncios: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "Hubo un error al traer los anuncios",
+      });
+    } else {
+      res.json({
+        ok: true,
+        content: anuncios,
+        message: null,
+      });
+    }
+  });
+};
+
 export var traerAnunciosXEmpresa = (req: Request, res: Response) => {
   let { id } = req.params;
   Anuncio.find({ anun_emId: id }, (error: CallbackError, anuncios: any) => {
