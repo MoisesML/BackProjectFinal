@@ -57,6 +57,6 @@ empresaSchema.methods.generarJWT = function () {
         emp_ruc : this.emp_ruc,
         tipo : "empresa"
     }
-    let token = sign(payload, 'proyecto', {expiresIn : 120}, {algorithm:'RS256'});
+    let token = sign(payload, 'proyecto', {expiresIn : 60000}, {algorithm:'RS256'});
     return token;
 }
