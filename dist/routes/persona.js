@@ -16,4 +16,6 @@ exports.persona_router.post('/trabajo/:id', Validador_1.controladorPersona, pers
 exports.persona_router.post('/telefono/:id', Validador_1.controladorPersona, persona_1.agregarFono);
 exports.persona_router.post('/estudio/:id', Validador_1.controladorPersona, persona_1.agregarEstudio);
 exports.persona_router.delete('/eliminarFono/:id/:idFono', Validador_1.controladorPersona, persona_1.eliminarFono);
+exports.persona_router.delete('/eliminarFono/:id/:idTrabajo', Validador_1.controladorPersona, persona_1.eliminarTrabajo);
+exports.persona_router.delete('/eliminarFono/:id/:idEstudio', Validador_1.controladorPersona, persona_1.eliminarEstudio);
 // FALTA ELIMINAR LOS TRABAJOS Y ESTUDIOS

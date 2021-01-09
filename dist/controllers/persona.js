@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarFono = exports.editarFono = exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
+exports.eliminarTrabajo = exports.eliminarEstudio = exports.eliminarFono = exports.editarFono = exports.agregarTrabajo = exports.agregarEstudio = exports.agregarFono = exports.editarPersona = exports.devolverPersona = exports.devolverPersonas = exports.loginPersona = exports.crearPersona = void 0;
 const mongoose_1 = require("../config/mongoose");
 var crearPersona = (req, res) => {
     let { per_emal } = req.body;
@@ -258,7 +258,7 @@ var eliminarFono = (req, res) => {
                         _id,
                         fono_num,
                         fono_ope,
-                        fono_sta
+                        fono_sta,
                     };
                 }
                 else {
@@ -276,3 +276,79 @@ var eliminarFono = (req, res) => {
     });
 };
 exports.eliminarFono = eliminarFono;
+var eliminarEstudio = (req, res) => {
+    let { id, idEstudio } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo quitar el estudio",
+            });
+        }
+        else {
+            let estudios = persona.per_estu;
+            let nuevoEstudios = estudios.map((est, i) => {
+                let { _id, est_nom, est_nvl, est_inst, est_ini, est_fin, est_sta, } = est;
+                if (_id == idEstudio) {
+                    est_sta = "false";
+                    return {
+                        _id,
+                        est_nom,
+                        est_nvl,
+                        est_inst,
+                        est_ini,
+                        est_fin,
+                        est_sta,
+                    };
+                }
+                else {
+                    return est;
+                }
+            });
+            persona.per_estu = nuevoEstudios;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se elimino el estudio correctamente",
+            });
+        }
+    });
+};
+exports.eliminarEstudio = eliminarEstudio;
+var eliminarTrabajo = (req, res) => {
+    let { id, idTrabajo } = req.params;
+    mongoose_1.Persona.findById(id, (error, persona) => {
+        if (error) {
+            res.status(200).json({
+                ok: false,
+                content: error,
+                message: "No se pudo quitar el trabajo",
+            });
+        }
+        else {
+            let trabajos = persona.per_trab;
+            let nuevoTrabajos = trabajos.map((trab, i) => {
+                let { _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta } = trab;
+                if (_id == idTrabajo) {
+                    trab_sta = "false";
+                    return {
+                        _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta
+                    };
+                }
+                else {
+                    return est;
+                }
+            });
+            persona.per_trab = nuevoTrabajos;
+            persona.save();
+            res.status(201).json({
+                ok: true,
+                content: persona,
+                message: "Se elimino el trabajo correctamente",
+            });
+        }
+    });
+};
+exports.eliminarTrabajo = eliminarTrabajo;

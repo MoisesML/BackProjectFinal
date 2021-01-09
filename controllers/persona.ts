@@ -196,7 +196,7 @@ export var agregarTrabajo = (req: Request, res: Response) => {
 
 export var editarFono = (req: Request, res: Response) => {
   let { id, idFono } = req.params;
-  let { fono_num:numero, fono_ope:operador} = req.body;
+  let { fono_num: numero, fono_ope: operador } = req.body;
   Persona.findById(id, (error: CallbackError, persona: any) => {
     if (error) {
       res.status(200).json({
@@ -206,7 +206,7 @@ export var editarFono = (req: Request, res: Response) => {
       });
     } else {
       let telefonos = persona.per_fonos;
-      let nuevoFonos = telefonos.map((tel:any, i:any) => {
+      let nuevoFonos = telefonos.map((tel: any, i: any) => {
         let { _id, fono_num, fono_ope } = tel;
         if (_id == idFono) {
           fono_num = numero;
@@ -242,15 +242,15 @@ export var eliminarFono = (req: Request, res: Response) => {
       });
     } else {
       let telefonos = persona.per_fonos;
-      let nuevoFonos = telefonos.map((tel:any, i:any) => {
+      let nuevoFonos = telefonos.map((tel: any, i: any) => {
         let { _id, fono_num, fono_ope, fono_sta } = tel;
         if (_id == idFono) {
-          fono_sta = "false"
+          fono_sta = "false";
           return {
             _id,
             fono_num,
             fono_ope,
-            fono_sta
+            fono_sta,
           };
         } else {
           return tel;
@@ -262,6 +262,89 @@ export var eliminarFono = (req: Request, res: Response) => {
         ok: true,
         content: persona,
         message: "Se elimino el telefono correctamente",
+      });
+    }
+  });
+};
+
+export var eliminarEstudio = (req: Request, res: Response) => {
+  let { id, idEstudio } = req.params;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo quitar el estudio",
+      });
+    } else {
+      let estudios = persona.per_estu;
+      let nuevoEstudios = estudios.map((est: any, i: any) => {
+        let {
+          _id,
+          est_nom,
+          est_nvl,
+          est_inst,
+          est_ini,
+          est_fin,
+          est_sta,
+        } = est;
+        if (_id == idEstudio) {
+          est_sta = "false";
+          return {
+            _id,
+            est_nom,
+            est_nvl,
+            est_inst,
+            est_ini,
+            est_fin,
+            est_sta,
+          };
+        } else {
+          return est;
+        }
+      });
+      persona.per_estu = nuevoEstudios;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se elimino el estudio correctamente",
+      });
+    }
+  });
+};
+
+export var eliminarTrabajo = (req: Request, res: Response) => {
+  let { id, idTrabajo } = req.params;
+  Persona.findById(id, (error: CallbackError, persona: any) => {
+    if (error) {
+      res.status(200).json({
+        ok: false,
+        content: error,
+        message: "No se pudo quitar el trabajo",
+      });
+    } else {
+      let trabajos = persona.per_trab;
+      let nuevoTrabajos = trabajos.map((trab: any, i: any) => {
+        let {
+          _id,
+          trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta
+        } = trab;
+        if (_id == idTrabajo) {
+          trab_sta = "false";
+          return {
+            _id,trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta
+          };
+        } else {
+          return est;
+        }
+      });
+      persona.per_trab = nuevoTrabajos;
+      persona.save();
+      res.status(201).json({
+        ok: true,
+        content: persona,
+        message: "Se elimino el trabajo correctamente",
       });
     }
   });
