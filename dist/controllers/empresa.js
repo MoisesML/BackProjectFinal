@@ -38,14 +38,7 @@ exports.crearEmpresa = crearEmpresa;
 var loginEmpresa = (req, res) => {
     let { email, password } = req.body;
     mongoose_1.Empresa.findOne({ emp_emal: email }, (error, empresa) => {
-        if (error) {
-            res.status(404).json({
-                ok: false,
-                content: error,
-                message: "Usuario inexistente",
-            });
-        }
-        else {
+        if (empresa) {
             let validacion = empresa.validarContraseña(password);
             if (validacion) {
                 let token = empresa.generarJWT();
@@ -70,6 +63,13 @@ var loginEmpresa = (req, res) => {
                     message: "Contraseña incorrecta",
                 });
             }
+        }
+        else {
+            res.status(404).json({
+                ok: false,
+                content: error,
+                message: "Usuario inexistente",
+            });
         }
     });
 };
