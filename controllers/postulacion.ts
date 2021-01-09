@@ -4,7 +4,7 @@ import { Postulacion, Anuncio } from "../config/mongoose";
 
 export var agregarPostulante = (req: Request, res: Response) => {
   let { id } = req.params;
-  let { post_idPe } =req.body;
+  let { post_idPe } = req.body;
 
   Anuncio.findById(id, (error: CallbackError, anuncio: any) => {
     if (error) {
@@ -14,7 +14,7 @@ export var agregarPostulante = (req: Request, res: Response) => {
         message: "No se pudo encontrar el anuncio",
       });
     } else {
-      anuncio.anun_post.push(post_idPe)
+      anuncio.anun_post.push(post_idPe);
       anuncio.save();
       let objPostulacion: any = new Postulacion(req.body);
       objPostulacion.save((error: CallbackError, postulacion: Document) => {
@@ -36,40 +36,76 @@ export var agregarPostulante = (req: Request, res: Response) => {
   });
 };
 
-export var postulacionAnuncio = (req:Request, res:Response) => {
+export var postulacionAnuncio = (req: Request, res: Response) => {
   let { id } = req.params;
-  Postulacion.find({post_idAn:id}, (error:CallbackError, postulantes:any) => {
-    if (postulantes) {
-      res.json({
-        ok: true,
-        content: postulantes,
-        message: "Estos son los postulantes del anuncio",
-      });
-    } else {
-      res.json({
-        ok: false,
-        content: null,
-        message: "No se encontro anuncios contratados",
-      });
+  Postulacion.find(
+    { post_idAn: id },
+    (error: CallbackError, postulantes: any) => {
+      if (postulantes) {
+        res.json({
+          ok: true,
+          content: postulantes,
+          message: "Estos son los postulantes del anuncio",
+        });
+      } else {
+        res.json({
+          ok: false,
+          content: null,
+          message: "No se encontro anuncios contratados",
+        });
+      }
     }
-  })
+  );
 };
 
-export var postulacionesPersona = (req:Request, res:Response) => {
+export var postulacionesPersona = (req: Request, res: Response) => {
   let { id } = req.params;
-  Postulacion.find({post_idPe:id}, (error:CallbackError, postulaciones:any) => {
-    if (postulaciones) {
-      res.json({
-        ok: true,
-        content: postulaciones,
-        message: "Estos son las postulaciones de la persona",
-      });
-    } else {
-      res.json({
-        ok: false,
-        content: null,
-        message: "No se encontro anuncios contratados",
-      });
+  Postulacion.find(
+    { post_idPe: id },
+    (error: CallbackError, postulaciones: any) => {
+      if (postulaciones) {
+        res.json({
+          ok: true,
+          content: postulaciones,
+          message: "Estos son las postulaciones de la persona",
+        });
+      } else {
+        res.json({
+          ok: false,
+          content: null,
+          message: "No se encontro anuncios contratados",
+        });
+      }
     }
-  })
-}
+  );
+};
+
+export var postulacionExacta = (req: Request, res: Response) => {
+  let { id, idAn } = req.params;
+  Postulacion.findOne(
+    { post_idPe: id, post_idAn: idAn },
+    (error: CallbackError, postulacion: any) => {
+      if (error) {
+        res.json({
+          ok: false,
+          content: null,
+          message: "No se pudo encontrar la postulacion, error",
+        });
+      } else {
+        if (postulacion) {
+          res.json({
+            ok: true,
+            content: postulacion,
+            message: "Esta es la postulacion",
+          });
+        } else {
+          res.json({
+            ok: false,
+            content: null,
+            message: "Aun no has postulado",
+          });
+        }
+      }
+    }
+  );
+};
